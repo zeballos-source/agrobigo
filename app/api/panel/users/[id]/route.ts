@@ -9,9 +9,10 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 
   const body = await req.json();
 
+  const target = await prisma.user.findUnique({ where: { id: params.id } });
+  if (!target) return NextResponse.json({ error: "No encontrado" }, { status: 404 });
+
   if (typeof body.password === "string") {
-    const target = await prisma.user.findUnique({ where: { id: params.id } });
-    if (!target) return NextResponse.json({ error: "No encontrado" }, { status: 404 });
     if (target.role === "ADMIN") {
       return NextResponse.json({ error: "La contraseña del admin no se puede cambiar desde acá." }, { status: 403 });
     }
@@ -25,10 +26,12 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     return NextResponse.json({ ok: true });
   }
 
-  await prisma.user.update({
-    where: { id: params.id },
-    data: { active: typeof body.active === "boolean" ? body.active : undefined },
-  });
+  if (typeof body.active === "boolean") {
+    if (target.role === "ADMIN") {
+      return NextResponse.json({ error: "El admin no se puede desactivar desde acá." }, { status: 403 });
+    }
+    await prisma.user.update({ where: { id: params.id }, data: { active: body.active } });
+  }
 
   return NextResponse.json({ ok: true });
 }
