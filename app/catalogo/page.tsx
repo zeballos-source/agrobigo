@@ -14,10 +14,10 @@ export default async function CatalogoPage({
 }) {
   const { categoria, sucursal } = searchParams;
 
-  const [products, sucursales] = await Promise.all([
+  const [productsRaw, sucursales] = await Promise.all([
     prisma.product.findMany({
       where: {
-        status: "PUBLICADO",
+        status: { in: ["PUBLICADO", "RESERVADO", "VENDIDO"] },
         ...(categoria ? { category: categoria } : {}),
         ...(sucursal ? { sucursalId: sucursal } : {}),
       },
@@ -26,6 +26,10 @@ export default async function CatalogoPage({
     }),
     prisma.sucursal.findMany(),
   ]);
+
+  // Disponibles primero, reservados después, vendidos al final.
+  const statusOrder = { PUBLICADO: 0, RESERVADO: 1, VENDIDO: 2, BORRADOR: 3 };
+  const products = [...productsRaw].sort((a, b) => statusOrder[a.status] - statusOrder[b.status]);
 
   function filterHref(next: { categoria?: string; sucursal?: string }) {
     const params = new URLSearchParams();

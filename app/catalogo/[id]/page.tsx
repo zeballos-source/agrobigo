@@ -14,9 +14,11 @@ export default async function ProductPage({ params }: { params: { id: string } }
     include: { images: { orderBy: { order: "asc" } }, sucursal: true },
   });
 
-  if (!product || product.status !== "PUBLICADO") return notFound();
+  if (!product || product.status === "BORRADOR") return notFound();
 
   const waLink = productWhatsappLink(product, product.sucursal);
+  const sold = product.status === "VENDIDO";
+  const reserved = product.status === "RESERVADO";
 
   return (
     <>
@@ -80,6 +82,25 @@ export default async function ProductPage({ params }: { params: { id: string } }
             <h1 style={{ fontFamily: "var(--disp)", fontSize: 34, textTransform: "uppercase", margin: "0 0 10px" }}>
               {product.title}
             </h1>
+
+            {(sold || reserved) && (
+              <div
+                style={{
+                  display: "inline-block",
+                  background: sold ? "var(--rust-dark)" : "var(--wheat)",
+                  color: sold ? "#fff" : "var(--steel-900)",
+                  fontWeight: 800,
+                  fontSize: 12,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.04em",
+                  padding: "5px 12px",
+                  borderRadius: 3,
+                  marginBottom: 14,
+                }}
+              >
+                {sold ? "Vendido" : "Reservado"}
+              </div>
+            )}
             <div
               style={{
                 fontFamily: "var(--disp)",
@@ -107,9 +128,22 @@ export default async function ProductPage({ params }: { params: { id: string } }
               </p>
             )}
 
-            <a className="btn-primary" href={waLink} target="_blank" rel="noopener" style={{ background: "var(--monte)" }}>
-              💬 Consultar por WhatsApp
-            </a>
+            {sold ? (
+              <p style={{ fontSize: 14, color: "var(--steel-700)" }}>
+                Esta unidad ya se vendió — escribinos si te interesa una similar.
+              </p>
+            ) : (
+              <>
+                {reserved && (
+                  <p style={{ fontSize: 13, color: "var(--steel-700)", marginBottom: 10 }}>
+                    Tiene una reserva en curso — consultá por si se libera o por unidades similares.
+                  </p>
+                )}
+                <a className="btn-primary" href={waLink} target="_blank" rel="noopener" style={{ background: "var(--monte)" }}>
+                  💬 Consultar por WhatsApp
+                </a>
+              </>
+            )}
 
             <div style={{ marginTop: 20 }}>
               <p style={{ fontSize: 13, color: "var(--steel-700)", margin: "0 0 4px" }}>

@@ -392,6 +392,27 @@ section {
 .tag-cond.usado {
   background: var(--rust);
 }
+.status-ribbon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-family: var(--body);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 4px 10px;
+  border-radius: 2px;
+  color: #fff;
+  z-index: 2;
+}
+.status-ribbon.sold {
+  background: var(--rust-dark);
+}
+.status-ribbon.reserved {
+  background: var(--wheat);
+  color: var(--steel-900);
+}
 .card-body {
   padding: 16px;
 }
