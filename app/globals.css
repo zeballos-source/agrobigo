@@ -554,6 +554,7 @@ footer {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 20px;
+  overflow-x: auto;
 }
 .stat-tiles {
   display: grid;
@@ -676,11 +677,28 @@ textarea.input {
   }
   .panel-shell {
     flex-direction: column;
+    min-height: auto;
   }
   .panel-sidebar {
     width: 100%;
+    height: auto;
     flex-direction: row;
+    flex-wrap: wrap;
     overflow-x: auto;
+    position: static;
+    gap: 2px;
+    padding: 10px 12px;
+  }
+  .panel-sidebar a {
+    padding: 8px 10px;
+    white-space: nowrap;
+    font-size: 13px;
+  }
+  .panel-sidebar img {
+    height: 26px;
+  }
+  .panel-main {
+    padding: 20px 16px;
   }
 }
 @media (max-width: 560px) {
