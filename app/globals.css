@@ -11,7 +11,7 @@
   --ink: #12141c;
   --paper: #f6f7fb;
   --line: #d7dbe8;
-  --disp: "Big Shoulders Display", sans-serif;
+  --disp: "Montserrat", sans-serif;
   --body: "Work Sans", sans-serif;
   --mono: "IBM Plex Mono", monospace;
 }
@@ -78,10 +78,11 @@ header {
   color: var(--rust);
 }
 .loc-tag {
-  font-family: var(--mono);
-  font-size: 11px;
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 13px;
   color: var(--steel-100);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   margin-left: 10px;
   border-left: 1px solid var(--steel-700);
@@ -122,12 +123,12 @@ header {
   align-items: center;
 }
 .eyebrow {
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.14em;
+  font-family: var(--body);
+  font-size: 13px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--rust);
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 14px;
 }
 .hero h1 {
