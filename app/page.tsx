@@ -14,14 +14,7 @@ export default async function HomePage({
 }) {
   const { categoria, sucursal } = searchParams;
 
-  const [featured, totalPublicados, highlightRaw, productsRaw, sucursales] = await Promise.all([
-    prisma.product.findMany({
-      where: { status: "PUBLICADO" },
-      include: { images: { orderBy: { order: "asc" }, take: 1 }, sucursal: true },
-      orderBy: { createdAt: "desc" },
-      take: 6,
-    }),
-    prisma.product.count({ where: { status: "PUBLICADO" } }),
+  const [highlight, productsRaw, sucursales] = await Promise.all([
     prisma.product.findFirst({
       where: { status: "PUBLICADO", images: { some: {} } },
       include: { images: { orderBy: { order: "asc" }, take: 1 }, sucursal: true },
@@ -37,8 +30,6 @@ export default async function HomePage({
     }),
     prisma.sucursal.findMany(),
   ]);
-
-  const highlight = highlightRaw ?? featured[0];
 
   // Disponibles primero, reservados después, vendidos al final.
   const statusOrder = { PUBLICADO: 0, RESERVADO: 1, VENDIDO: 2, BORRADOR: 3 };
@@ -100,23 +91,7 @@ export default async function HomePage({
         )}
       </section>
 
-      <div className="furrow" />
-
-      <section>
-        <div className="section-head">
-          <h2>Destacados</h2>
-          <p>{totalPublicados} máquinas e implementos publicados hoy.</p>
-        </div>
-        <div className="grid">
-          {featured.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </div>
-      </section>
-
-      <div className="furrow" />
-
-      <section id="catalogo">
+      <section id="catalogo" style={{ paddingTop: 20 }}>
         <div className="section-head">
           <h2>Catálogo completo</h2>
           <p>Filtrá por categoría o sucursal.</p>
