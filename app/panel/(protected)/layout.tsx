@@ -21,7 +21,11 @@ export default async function PanelLayout({ children }: { children: React.ReactN
             <a href="/panel/equipo">Equipo</a>
           </>
         )}
-        <form action="/api/panel/logout" method="POST" style={{ marginTop: "auto", paddingTop: 16 }}>
+        <form
+          action="/api/panel/logout"
+          method="POST"
+          style={{ marginTop: 16, paddingTop: 16, borderTop: "1px solid var(--steel-700)" }}
+        >
           <button
             type="submit"
             style={{ background: "none", border: "none", color: "var(--steel-100)", cursor: "pointer", fontSize: 14, padding: "10px 12px" }}
