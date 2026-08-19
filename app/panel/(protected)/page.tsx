@@ -67,8 +67,13 @@ export default async function DashboardPage() {
                 <td>
                   <span className={`badge badge-${p.status.toLowerCase()}`}>{p.status}</span>
                 </td>
-                <td>
+                <td style={{ display: "flex", gap: 12 }}>
                   <Link href={`/panel/productos/${p.id}/editar`}>Editar</Link>
+                  {p.status !== "BORRADOR" && (
+                    <a href={`/catalogo/${p.id}`} target="_blank" rel="noopener">
+                      Ver publicación ↗
+                    </a>
+                  )}
                 </td>
               </tr>
             ))}

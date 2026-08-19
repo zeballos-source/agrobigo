@@ -17,6 +17,11 @@ export default async function EditarProductoPage({ params }: { params: { id: str
     <div>
       <div className="panel-topbar">
         <h1 style={{ fontFamily: "var(--disp)", textTransform: "uppercase", margin: 0 }}>Editar producto</h1>
+        {product.status !== "BORRADOR" && (
+          <a href={`/catalogo/${product.id}`} target="_blank" rel="noopener" className="btn-ghost">
+            Ver publicación ↗
+          </a>
+        )}
       </div>
       <EditProductForm product={product} sucursales={sucursales} />
     </div>
