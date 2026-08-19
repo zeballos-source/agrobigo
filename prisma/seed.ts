@@ -146,6 +146,15 @@ async function main() {
   let i = 0;
   const alternateSucursal = () => (i++ % 2 === 0 ? rioCuarto.id : santaRosa.id);
 
+  // Mezcla realista: 1 de cada 3 productos entra como usado (con año de uso),
+  // el resto queda nuevo — igual que el stock real de un concesionario.
+  let condIdx = 0;
+  const usedYears = [2016, 2017, 2018, 2019, 2020, 2021, 2022];
+  function nextCondition(): { condition: "NUEVO" | "USADO"; year?: number } {
+    const isUsed = condIdx++ % 3 === 2;
+    return isUsed ? { condition: "USADO", year: usedYears[condIdx % usedYears.length] } : { condition: "NUEVO" };
+  }
+
   for (const [model, hp, desc, imageUrl] of agrocheryTractores) {
     sampleProducts.push({
       category: "Tractor",
@@ -153,10 +162,10 @@ async function main() {
       model,
       title: `Tractor Agrochery ${model}${hp ? ` ${hp}HP` : ""}`,
       description: desc,
-      condition: "NUEVO",
       sucursalId: alternateSucursal(),
       status: "PUBLICADO",
       imageUrl,
+      ...nextCondition(),
     });
   }
 
@@ -167,10 +176,10 @@ async function main() {
       model,
       title,
       description: desc,
-      condition: "NUEVO",
       sucursalId: alternateSucursal(),
       status: "PUBLICADO",
       imageUrl,
+      ...nextCondition(),
     });
   }
 
@@ -181,10 +190,10 @@ async function main() {
       model,
       title,
       description: desc,
-      condition: "NUEVO",
       sucursalId: alternateSucursal(),
       status: "PUBLICADO",
       imageUrl,
+      ...nextCondition(),
     });
   }
 
