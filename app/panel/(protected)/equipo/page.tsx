@@ -36,7 +36,7 @@ export default async function EquipoPage() {
                 <td>{u.active ? "Activo" : "Inactivo"}</td>
                 <td style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                   <ToggleAgenteActivo id={u.id} active={u.active} />
-                  <ChangePasswordButton id={u.id} />
+                  {u.role !== "ADMIN" && <ChangePasswordButton id={u.id} />}
                 </td>
               </tr>
             ))}

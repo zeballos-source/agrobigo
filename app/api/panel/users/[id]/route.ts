@@ -10,6 +10,11 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   const body = await req.json();
 
   if (typeof body.password === "string") {
+    const target = await prisma.user.findUnique({ where: { id: params.id } });
+    if (!target) return NextResponse.json({ error: "No encontrado" }, { status: 404 });
+    if (target.role === "ADMIN") {
+      return NextResponse.json({ error: "La contraseña del admin no se puede cambiar desde acá." }, { status: 403 });
+    }
     if (body.password.length < 8) {
       return NextResponse.json({ error: "La contraseña debe tener al menos 8 caracteres." }, { status: 400 });
     }
