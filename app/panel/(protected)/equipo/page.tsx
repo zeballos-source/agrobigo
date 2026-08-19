@@ -2,6 +2,7 @@ import { requireAdminSession } from "@/lib/panel-auth";
 import { prisma } from "@/lib/prisma";
 import NuevoAgenteForm from "@/components/NuevoAgenteForm";
 import ToggleAgenteActivo from "@/components/ToggleAgenteActivo";
+import ChangePasswordButton from "@/components/ChangePasswordButton";
 
 export default async function EquipoPage() {
   await requireAdminSession();
@@ -33,8 +34,9 @@ export default async function EquipoPage() {
                 <td>{u.email}</td>
                 <td>{u.role}</td>
                 <td>{u.active ? "Activo" : "Inactivo"}</td>
-                <td>
+                <td style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                   <ToggleAgenteActivo id={u.id} active={u.active} />
+                  <ChangePasswordButton id={u.id} />
                 </td>
               </tr>
             ))}

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import bcrypt from "bcryptjs";
 import { getAuthedUserFromRequest } from "@/lib/panel-auth";
 import { prisma } from "@/lib/prisma";
 
@@ -7,6 +8,18 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   if (!admin || admin.role !== "ADMIN") return NextResponse.json({ error: "No autorizado" }, { status: 401 });
 
   const body = await req.json();
+
+  if (typeof body.password === "string") {
+    if (body.password.length < 8) {
+      return NextResponse.json({ error: "La contraseña debe tener al menos 8 caracteres." }, { status: 400 });
+    }
+    await prisma.user.update({
+      where: { id: params.id },
+      data: { passwordHash: await bcrypt.hash(body.password, 10) },
+    });
+    return NextResponse.json({ ok: true });
+  }
+
   await prisma.user.update({
     where: { id: params.id },
     data: { active: typeof body.active === "boolean" ? body.active : undefined },
