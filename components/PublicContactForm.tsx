@@ -53,7 +53,7 @@ export default function PublicContactForm({ productId }: { productId: string }) 
         style={{ minHeight: 64 }}
       />
       <button type="submit" disabled={sending} className="btn-ghost" style={{ alignSelf: "flex-start" }}>
-        {sending ? "Enviando..." : "Que me llamen"}
+        {sending ? "Enviando..." : "Enviar consulta"}
       </button>
     </form>
   );

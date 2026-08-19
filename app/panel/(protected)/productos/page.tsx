@@ -10,9 +10,9 @@ export default async function ProductosPage() {
   return (
     <div>
       <div className="panel-topbar">
-        <h1 style={{ fontFamily: "var(--disp)", textTransform: "uppercase", margin: 0 }}>Productos</h1>
+        <h1 style={{ fontFamily: "var(--disp)", textTransform: "uppercase", margin: 0 }}>Publicaciones</h1>
         <Link href="/panel/productos/nuevo" className="btn-primary">
-          + Publicación rápida
+          + Nueva publicación
         </Link>
       </div>
 
@@ -46,7 +46,7 @@ export default async function ProductosPage() {
             {products.length === 0 && (
               <tr>
                 <td colSpan={6} style={{ color: "var(--steel-700)" }}>
-                  Todavía no cargaste ningún producto.
+                  Todavía no cargaste ninguna publicación.
                 </td>
               </tr>
             )}

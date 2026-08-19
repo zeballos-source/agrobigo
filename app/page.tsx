@@ -27,13 +27,13 @@ export default async function HomePage() {
 
       <section className="hero">
         <div>
-          <div className="eyebrow">Catálogo digital · Agro Bigo</div>
+          <div className="eyebrow">Maquinaria · Repuestos · Asesoramiento</div>
           <h1>
-            Tu stock <em>siempre a la vista.</em>
+            Seguimos creciendo <em>junto al productor.</em>
           </h1>
           <p>
-            Maquinaria e implementos agrícolas de Agrochery, Impagro y Ascanelli — ordenados, con ubicación y botón de
-            WhatsApp directo. Río Cuarto (Córdoba) y Santa Rosa de Conlara (San Luis).
+            Concesionario oficial Agrochery y distribuidor de Impagro y Ascanelli. Entrega inmediata y financiación en
+            Río Cuarto (Córdoba) y Santa Rosa de Conlara (San Luis).
           </p>
           <div className="hero-ctas">
             <Link className="btn-primary" href="/catalogo">

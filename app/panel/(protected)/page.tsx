@@ -14,15 +14,20 @@ export default async function DashboardPage() {
     <div>
       <div className="panel-topbar">
         <h1 style={{ fontFamily: "var(--disp)", textTransform: "uppercase", margin: 0 }}>Dashboard</h1>
-        <Link href="/panel/productos/nuevo" className="btn-primary">
-          + Publicación rápida
-        </Link>
+        <div style={{ display: "flex", gap: 10 }}>
+          <Link href="/panel/productos" className="btn-ghost">
+            Ver publicaciones
+          </Link>
+          <Link href="/panel/productos/nuevo" className="btn-primary">
+            + Nueva publicación
+          </Link>
+        </div>
       </div>
 
       <div className="stat-tiles">
         <div className="stat-tile">
           <b>{total}</b>
-          <span>Productos totales</span>
+          <span>Publicaciones totales</span>
         </div>
         <div className="stat-tile">
           <b>{publicados}</b>
@@ -39,7 +44,12 @@ export default async function DashboardPage() {
       </div>
 
       <div className="panel-card">
-        <h3 style={{ marginTop: 0, fontFamily: "var(--disp)", textTransform: "uppercase" }}>Últimos cargados</h3>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+          <h3 style={{ marginTop: 0, fontFamily: "var(--disp)", textTransform: "uppercase" }}>Últimas publicaciones</h3>
+          <Link href="/panel/productos" style={{ fontSize: 13 }}>
+            Ver todas →
+          </Link>
+        </div>
         <table className="data-table">
           <thead>
             <tr>

@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Agro Bigo — Catálogo de maquinaria agrícola",
-  description: "Catálogo digital de Agro Bigo S.R.L. — Río Cuarto (Córdoba) y Santa Rosa de Conlara (San Luis).",
+  title: "Agro Bigo — Maquinaria agrícola",
+  description:
+    "Concesionario oficial Agrochery y distribuidor Impagro / Ascanelli. Río Cuarto (Córdoba) y Santa Rosa de Conlara (San Luis).",
   icons: { icon: "/logo.jpg" },
 };
 

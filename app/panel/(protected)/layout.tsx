@@ -11,8 +11,8 @@ export default async function PanelLayout({ children }: { children: React.ReactN
           <img src="/logo.jpg" alt="Agro Bigo S.R.L." style={{ height: 34, borderRadius: 3 }} />
         </a>
         <a href="/panel">Dashboard</a>
-        <a href="/panel/productos">Productos</a>
-        <a href="/panel/productos/nuevo">Publicación rápida</a>
+        <a href="/panel/productos">Publicaciones</a>
+        <a href="/panel/productos/nuevo">+ Nueva publicación</a>
         <a href="/panel/contactos">Contactos</a>
         <a href="/panel/oportunidades">Oportunidades</a>
         {user.role === "ADMIN" && (
