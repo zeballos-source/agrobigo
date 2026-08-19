@@ -12,7 +12,7 @@ export default function SiteHeader() {
           <span className="loc-tag">Río Cuarto · Sta. Rosa de Conlara</span>
         </div>
         <div className="nav-links">
-          <Link href="/catalogo">Catálogo</Link>
+          <Link href="/#catalogo">Catálogo</Link>
           <Link href="/panel/login">Panel</Link>
           <a className="btn-wsp" href="https://wa.me/5493584335761" target="_blank" rel="noopener">
             WhatsApp
